@@ -18,7 +18,7 @@ for q_row=1:size(X1,1)
 		for dim=1:size(X1,2)
 			inner_product = inner_product + X1(q_row, dim)*X2(d_row, dim);
 			q_norm = q_norm + X1(q_row, dim)^2;
-			p_norm = p_norm + X2(d_row, dim)^2;
+			d_norm = d_norm + X2(d_row, dim)^2;
 		end
 		
 		q_norm = sqrt(q_norm);
