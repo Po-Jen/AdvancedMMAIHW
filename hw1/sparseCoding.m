@@ -9,6 +9,10 @@ function [querySR, databaseSR, D] = sparseCoding(query, database)
 %           D - d*k*p
 %              dictionaries for every parts.
 
+%Reference:
+% http://blog.sciencenet.cn/blog-261330-813357.html
+% http://spams-devel.gforge.inria.fr/doc/html/index.html
+
 % Some initial values
 qPts = size(query,1);
 nPts = size(database,1);
