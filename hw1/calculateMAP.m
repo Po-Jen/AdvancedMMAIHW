@@ -38,6 +38,8 @@ meanAveragePrecision = 0;
 m = size(queryId,1);    %120 verified
 n = size(databaseId,1); %13113 verified
 
+
+
 for queryNum=1:m
   averagePrecision=0;
   correctNum=0;  
