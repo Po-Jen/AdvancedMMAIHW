@@ -18,7 +18,7 @@ qPts = size(query,1);
 nPts = size(database,1);
 nDim = 59;
 nPart = 80;
-K = 100;
+K = 100; %number of basis in dict
 
 parD.lambda = 0.01;
 parD.K = K;
@@ -40,6 +40,17 @@ databaseSR = zeros(nPts, K*nPart);
 
 % Loop through each part
 for i = 1:nPart
-	% You code here
+	% Concatenate the db img's i's part to feed for dictionary training
+    X = zeros(nDim, nPts);
+    for n=1:nPts
+        X(:,n) = transpose(database(n,1+(i-1)*nDim:(i-1)*nDim+nDim));
+    end
+    
+    %Train dictionary by using db img
+    D = mexTrainDL(X,parD);
+    
+    %Express every query by dict
+    querySR(:,1+(i-1)*K:(i-1)*K+K) = transpose(mexLasso(transpose(query(:,1+(i-1)*nDim:(i-1)*nDim+nDim)), D, parS));
+    databaseSR(:,1+(i-1)*K:(i-1)*K+K) = transpose(mexLasso(transpose(database(:,1+(i-1)*nDim:(i-1)*nDim+nDim)), D, parS));
 end
 
