@@ -47,10 +47,10 @@ for i = 1:nPart
     end
     
     %Train dictionary by using db img
-    D = mexTrainDL(X,parD);
+    D(:,:,i) = mexTrainDL(X,parD);
     
     %Express every query by dict
-    querySR(:,1+(i-1)*K:(i-1)*K+K) = transpose(mexLasso(transpose(query(:,1+(i-1)*nDim:(i-1)*nDim+nDim)), D, parS));
-    databaseSR(:,1+(i-1)*K:(i-1)*K+K) = transpose(mexLasso(transpose(database(:,1+(i-1)*nDim:(i-1)*nDim+nDim)), D, parS));
+    querySR(:,1+(i-1)*K:(i-1)*K+K) = transpose(mexLasso(transpose(query(:,1+(i-1)*nDim:(i-1)*nDim+nDim)), D(:,:,i), parS));
+    databaseSR(:,1+(i-1)*K:(i-1)*K+K) = transpose(mexLasso(transpose(database(:,1+(i-1)*nDim:(i-1)*nDim+nDim)), D(:,:,i), parS));
 end
 
